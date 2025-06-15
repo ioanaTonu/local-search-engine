@@ -5,27 +5,31 @@
 namespace fs = std::filesystem;
 
 std::vector<std::string> TextFileManager::listTextFiles() {    
-    std::vector<std::string> vector_of_file_path(NUMBER_OF_FILES);
+    std::vector<std::string> vectorOfFilePath(NUMBER_OF_FILES);
 
     for (const auto & entry : fs::directory_iterator(path)) {
         if (entry.path().extension().string() == ".txt") {
-            vector_of_file_path.push_back(entry.path().string());
+            vectorOfFilePath.push_back(entry.path().string());
         }
     }
 
-    return vector_of_file_path; // inca nu stiu de ce, dar mi se salveaza niste path-uri vide; tb pus if (i.length() > 0)
+    return vectorOfFilePath; // inca nu stiu de ce, dar mi se salveaza niste path-uri vide; tb pus if (i.length() > 0)
 }
 
-void TextFileManager::readFiles(std::string path_to_file) {
+std::string TextFileManager::readFiles(std::string pathToFile) {
     std::string line;
-    std::ifstream myfile (path_to_file);
+    std::string text = "";
+    std::ifstream myfile (pathToFile);
     if (myfile.is_open()) {
         while ( std::getline (myfile,line) ) {
-            std::cout << line << '\n'; // va tb modificat in functie de cerinta
+            text += " ";
+            text += line;
         }
             myfile.close();
+            return text;
     }
 
-    else 
+    else {
         std::cout << "Unable to open file"; 
+        return 0;}
 }

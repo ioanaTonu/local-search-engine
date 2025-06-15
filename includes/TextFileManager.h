@@ -9,7 +9,7 @@ class TextFileManager : public FileManager{
     public:
     TextFileManager(const std::string path):FileManager(path){}
     std::vector<std::string> listTextFiles();
-    void readFiles(std::string path_to_file);
+    std::string readFiles(std::string pathToFile);
     //~TextFileManager();
 };
 
